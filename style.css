@@ -391,8 +391,6 @@
             margin: var(--space-2xl) 0;
             margin-left: 10%;
             margin-right: 10%;
-            display: grid;
-            grid-template-columns: 8fr 2fr;
         }
         
         .map-section h2 {
@@ -481,11 +479,33 @@
             font-size: 0.85rem;
             pointer-events: none;
         }
+
+        .mapa-box {
+            display: grid;
+            grid-template-columns: 6.5fr 3.5fr;
+        }
         
         .mapa {
             position: relative;
-            background: black;
+            background: grey;
+            height: 1000px;
         }
+
+        .mapa img {
+            position: absolute;
+            top: 0;
+            left: 0%;
+        }
+
+        .img1, .img2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: opacity 0.3s ease;
+        }
+
         .legend {
             padding: var(--space-lg);
         }
@@ -496,7 +516,6 @@
             margin-bottom: var(--space-md);
             color: var(--color-accent);
         }
-
         .pietra-item {
             padding: var(--space-md);
             margin-bottom: var(--space-sm);
@@ -517,6 +536,33 @@
             border-color: var(--color-accent);
             box-shadow: 0 0 0 3px rgba(146, 194, 134, 0.1);
         }
+
+
+
+
+        .goradol-item {
+            padding: var(--space-md);
+            margin-bottom: var(--space-sm);
+            background: var(--color-surface);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .goradol-item:hover {
+            background: var(--color-surface-hover);
+            border-color: var(--color-accent);
+        }
+        
+        .goradol-item.active {
+            background: var(--color-surface-hover);
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px rgba(146, 194, 134, 0.1);
+        }
+
+
+
 
         .legend-item {
             padding: var(--space-md);

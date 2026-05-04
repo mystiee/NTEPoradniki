@@ -117,14 +117,44 @@ document.addEventListener("DOMContentLoaded", updateDates);
 
 
 
-const items = document.querySelectorAll(".pietra-item");
+function setupActive(selector) {
+    const items = document.querySelectorAll(selector);
+
+    items.forEach(item => {
+        item.addEventListener("click", () => {
+            items.forEach(i => i.classList.remove("active"));
+            item.classList.add("active");
+        });
+    });
+}
+
+// dla pietra
+setupActive(".pietra-item");
+
+// dla gora/dol
+setupActive(".goradol-item");
+
+
+
+
+
+
+
+const items = document.querySelectorAll(".goradol-item");
+const img1 = document.querySelector(".img1");
+const img2 = document.querySelector(".img2");
 
 items.forEach(item => {
     item.addEventListener("click", () => {
-        // usuń active ze wszystkich
         items.forEach(i => i.classList.remove("active"));
-
-        // dodaj active do klikniętego
         item.classList.add("active");
+
+        if (item.dataset.view === "top") {
+            img1.style.opacity = "1";
+            img2.style.opacity = "0.3";
+        } else {
+            img1.style.opacity = "0.3";
+            img2.style.opacity = "1";
+        }
     });
 });
