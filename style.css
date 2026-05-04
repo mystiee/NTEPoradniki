@@ -484,6 +484,12 @@
             display: grid;
             grid-template-columns: 6.5fr 3.5fr;
         }
+        @media (min-width: 765px) {
+            .mapa-box {
+                display: grid;
+                grid-template-rows: auto 1fr;
+            }
+        }
         
         .mapa {
             position: relative;
