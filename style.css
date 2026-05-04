@@ -484,10 +484,10 @@
             display: grid;
             grid-template-columns: 6.5fr 3.5fr;
         }
-        @media (min-width: 765px) {
+        @media (max-width: 765px) {
             .mapa-box {
                 display: grid;
-                grid-template-rows: auto 1fr;
+                grid-template-columns: 1fr;
             }
         }
         
@@ -675,9 +675,7 @@
             .categories-grid {
                 grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             }        
-            .legend {
-                order: -1;
-            }
+
         }
         
         /* Page Transitions */
