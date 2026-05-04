@@ -83,9 +83,48 @@
             });
         });
         
-        // Search functionality (basic)
-        document.querySelector('.search-bar').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
-            console.log('Searching for:', searchTerm);
-            // In a real implementation, this would filter the guides
-        });
+
+
+
+
+
+
+
+function updateDates() {
+    document.querySelectorAll(".update-date").forEach(el => {
+
+        const [year, month, day] = el.dataset.date.split("-").map(Number);
+        const past = new Date(year, month - 1, day);
+        const now = new Date();
+
+        const diffDays = Math.floor((now - past) / (1000 * 60 * 60 * 24));
+
+        if (diffDays === 0) {
+            el.textContent = "dzisiaj";
+        } else if (diffDays === 1) {
+            el.textContent = "wczoraj";
+        } else {
+            el.textContent = `${diffDays} dni temu`;
+        }
+    });
+}
+
+// uruchom po załadowaniu strony
+document.addEventListener("DOMContentLoaded", updateDates);
+
+
+
+
+
+
+const items = document.querySelectorAll(".pietra-item");
+
+items.forEach(item => {
+    item.addEventListener("click", () => {
+        // usuń active ze wszystkich
+        items.forEach(i => i.classList.remove("active"));
+
+        // dodaj active do klikniętego
+        item.classList.add("active");
+    });
+});

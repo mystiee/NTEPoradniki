@@ -183,6 +183,9 @@
         }
         
         .card {
+            display: block;
+            text-decoration: none;
+            color: inherit;
             background: var(--color-surface);
             border: 1px solid var(--color-border);
             border-radius: var(--radius-md);
@@ -301,7 +304,7 @@
         
         /* Article Page */
         .article-container {
-            max-width: 800px;
+            max-width: 2000px;
             margin: 0 auto;
         }
         
@@ -386,6 +389,10 @@
             border-radius: var(--radius-md);
             padding: var(--space-xl);
             margin: var(--space-2xl) 0;
+            margin-left: 10%;
+            margin-right: 10%;
+            display: grid;
+            grid-template-columns: 8fr 2fr;
         }
         
         .map-section h2 {
@@ -397,19 +404,34 @@
         
         .map-container {
             display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: var(--space-xl);
-            align-items: start;
+            grid-template-rows: auto auto auto 1fr;
+            gap: 40px;
+        }
+
+        .tytul {
+            text-align: center;
         }
         
-        .map-wrapper {
-            position: relative;
-            background: #000;
-            border-radius: var(--radius-sm);
-            overflow: hidden;
-            border: 2px solid var(--color-border);
+        .pietra {
+            text-align: center;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            max-height: 40px;
+            gap: 10px;
+            margin-left: 10%;
+            margin-right: 10%;
         }
-        
+
+        .goradol {
+            text-align: center;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            margin-left: 30%;
+            margin-right: 30%;
+            max-height: 40px;
+            gap: 10px;
+        }
+
         .map-image {
             width: 100%;
             height: auto;
@@ -460,10 +482,11 @@
             pointer-events: none;
         }
         
+        .mapa {
+            position: relative;
+            background: black;
+        }
         .legend {
-            background: var(--color-bg);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-sm);
             padding: var(--space-lg);
         }
         
@@ -473,7 +496,28 @@
             margin-bottom: var(--space-md);
             color: var(--color-accent);
         }
+
+        .pietra-item {
+            padding: var(--space-md);
+            margin-bottom: var(--space-sm);
+            background: var(--color-surface);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
         
+        .pietra-item:hover {
+            background: var(--color-surface-hover);
+            border-color: var(--color-accent);
+        }
+        
+        .pietra-item.active {
+            background: var(--color-surface-hover);
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px rgba(146, 194, 134, 0.1);
+        }
+
         .legend-item {
             padding: var(--space-md);
             margin-bottom: var(--space-sm);
@@ -578,12 +622,7 @@
             
             .categories-grid {
                 grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            }
-            
-            .map-container {
-                grid-template-columns: 1fr;
-            }
-            
+            }        
             .legend {
                 order: -1;
             }
@@ -608,4 +647,11 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        .heistGuidePage {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            margin-left: 10%;
+            margin-right: 10%;
         }

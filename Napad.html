@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neverness to Everness - Poradniki</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="logo">
+                ⚡ Neverness Guide
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="active">Strona główna</a></li>
+                <li><a href="kategorie.html">Kategorie</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Heist Guide Page with Interactive Map -->
+    <div id="heistGuidePage">
+        <div class="container">
+            <article class="article-container">
+                <header class="article-header">
+                    <h1>Pink Paws Heist - Kompletny przewodnik</h1>
+                    <div class="article-meta">
+                        <span>📅 Opublikowano: <span class="update-date" data-date="2026-05-04"></span></span>
+                        <span>✍️ Autor: Figuana & Ichigo</span>
+                    </div>
+                </header>
+
+
+                
+            </article>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Interactive Map Section -->
+<div class="map-section">
+
+       
+
+        <div class="map-container">
+
+
+
+
+
+
+
+
+
+            <div class="tytul">
+                <h2>🗺️ Interaktywna mapa lokacji</h2>
+            </div>
+
+
+
+
+
+
+
+
+            <div class="pietra">
+                <div class="pietra-item active">Pierwsze</div>
+                <div class="pietra-item">Drugie</div>
+                <div class="pietra-item">Trzecie</div>
+                <div class="pietra-item">Skarbiec</div>
+            </div>
+
+
+            
+
+
+
+
+            <div class="goradol">
+                <div class="pietra-item active">Góra</div>
+                <div class="pietra-item">Dół</div>
+            </div>
+
+
+
+
+
+
+
+            <div class="mapa">
+                                
+                <!-- Interactive markers -->
+                <div class="map-marker" id="marker1" data-point="punkt1" style="top: 10%; left: 10%;">
+                    <div class="map-marker-label">1</div>
+                </div>
+                <div class="map-marker" id="marker2" data-point="punkt2" style="top: 28%; left: 35%;">
+                    <div class="map-marker-label">2</div>
+                </div>
+                <div class="map-marker" id="marker3" data-point="punkt3" style="top: 82%; left: 50%;">
+                    <div class="map-marker-label">3</div>
+                </div>
+                <div class="map-marker" id="marker4" data-point="punkt4" style="top: 52%; left: 23%;">
+                    <div class="map-marker-label">4</div>
+                </div>
+                <div class="map-marker" id="marker5" data-point="punkt5" style="top: 52%; left: 77%;">
+                    <div class="map-marker-label">5</div>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+                    
+
+
+
+
+
+        <div class="legend">
+                    <h3>Legenda</h3>
+                    
+                    <div class="legend-item" data-target="punkt1">
+                        <div class="legend-item-header">
+                            <div class="legend-number">1</div>
+                            <div class="legend-title">Główne wejście</div>
+                        </div>
+                        <div class="legend-description">Strażnik przy drzwiach. Użyj tylnego wejścia przez wentylację.</div>
+                    </div>
+                    
+                    <div class="legend-item" data-target="punkt2">
+                        <div class="legend-item-header">
+                            <div class="legend-number">2</div>
+                            <div class="legend-title">Kamery bezpieczeństwa</div>
+                        </div>
+                        <div class="legend-description">4 kamery w biurach. Zhackuj panel kontrolny w pokoju ochrony.</div>
+                    </div>
+                    
+                    <div class="legend-item" data-target="punkt3">
+                        <div class="legend-item-header">
+                            <div class="legend-number">3</div>
+                            <div class="legend-title">Skarbiec</div>
+                        </div>
+                        <div class="legend-description">Cel misji. Wymaga 3 kluczy elektronicznych z różnych lokacji.</div>
+                    </div>
+                    
+                    <div class="legend-item" data-target="punkt4">
+                        <div class="legend-item-header">
+                            <div class="legend-number">4</div>
+                            <div class="legend-title">Strażnicy</div>
+                        </div>
+                        <div class="legend-description">2 patrolujących strażników. Patrol co 45 sekund.</div>
+                    </div>
+                    
+                    <div class="legend-item" data-target="punkt5">
+                        <div class="legend-item-header">
+                            <div class="legend-number">5</div>
+                            <div class="legend-title">Magazyn</div>
+                        </div>
+                        <div class="legend-description">Znaj dziesz tu apteczki i dodatkowy ekwipunek.</div>
+                    </div>
+        </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+    <script src="script.js"></script>
+</body>
+</html>

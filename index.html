@@ -10,22 +10,32 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+
+
+
     <!-- Navbar -->
     <nav class="navbar">
         <div class="navbar-container">
-            <a href="#" class="logo" onclick="showPage('home')">
+            <a href="index.html" class="logo">
                 ⚡ Neverness Guide
             </a>
             <button class="menu-toggle" onclick="toggleMenu()">☰</button>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#" class="active" onclick="showPage('home')">Strona główna</a></li>
-                <li><a href="#" onclick="showPage('categories')">Kategorie</a></li>
+                <li><a href="index.html" class="active">Strona główna</a></li>
+                <li><a href="kategorie.html">Kategorie</a></li>
             </ul>
         </div>
     </nav>
 
+
+
+
+
+
+
     <!-- Home Page -->
-    <div id="homePage" class="page active">
+    <div id="homePage">
         <div class="container">
             <!-- Hero -->
             <section class="hero">
@@ -42,38 +52,35 @@
                 <div class="cards-grid">
 
 
-                    <div class="card" onclick="showPage('heist-guide')">
+                    <a class="card" href="Napad.html">
                         <div class="card-icon">🕵️</div>
-                        <h3>Pink Paw Heist - Kompletny przewodnik</h3>
+                        <h3>Pink Paws Heist - Kompletny przewodnik</h3>
                         <div class="card-meta">
-                            <span>📅 2 dni temu</span>
+                            <span>📅 Ostatnio modyfikowano <span class="update-date" data-date="2026-05-04"></span></span>
                         </div>
-                        <p>Szczegółowa mapa i strategia dla jednego z najtrudniejszych napadów w grze. Dowiedz się gdzie znajdują się kamery i jak uniknąć strażników.</p>
-                    </div>
+                        <p>Szczegółowa mapa i przedmioty dla jednego napadów w grze. Dowiedz się gdzie znajdują się przejścia i do czego służą karty.</p>
+                    </a>
 
 
-                    <div class="card">
-                        <div class="card-icon">⚔️</div>
-                        <h3>System walki dla początkujących</h3>
+                    <a class="card">
+                        <!-- <div class="card-icon">...</div>
+                        <h3>...</h3>
                         <div class="card-meta">
-                            <span>📅 5 dni temu</span>
-                            <span>👁️ 1.8k wyświetleń</span>
+                            <span>...</span>
                         </div>
-                        <p>Podstawy combos, uników i bloków. Naucz się efektywnie wykorzystywać system walki.</p>
-                        <button class="btn">Czytaj więcej →</button>
-                    </div>
+                        <p>...</p>
+                        <button class="btn">...</button>-->
+                    </a>
 
 
-                    <div class="card">
-                        <div class="card-icon">💰</div>
-                        <h3>Najlepsze sposoby na zarabianie</h3>
+                    <a class="card">
+                        <!-- <div class="card-icon">...</div>
+                        <h3>...</h3>
                         <div class="card-meta">
-                            <span>📅 1 tydzień temu</span>
-                            <span>👁️ 3.1k wyświetleń</span>
+                            <span>...</span>
                         </div>
-                        <p>Farming, handel, misje poboczne - wszystko co musisz wiedzieć o zarabianiu waluty w grze.</p>
-                        <button class="btn">Czytaj więcej →</button>
-                    </div>
+                        <p>...</p>-->
+                    </a>
 
 
                 </div>
@@ -81,239 +88,14 @@
         </div>
     </div>
 
-    <!-- Categories Page -->
-    <div id="categoriesPage" class="page">
-        <div class="container">
-            <section class="hero">
-                <h1>Kategorie poradników</h1>
-                <p>Wybierz kategorię aby przeglądać tematyczne przewodniki</p>
-            </section>
+    
 
-            <div class="categories-grid">
-                <a href="#" class="category-card" onclick="showPage('heist-guide')">
-                    <div class="category-icon">🕵️</div>
-                    <h3>Napady</h3>
-                    <div class="category-count">8 poradników</div>
-                </a>
-                <a href="#" class="category-card">
-                    <div class="category-icon">⚔️</div>
-                    <h3>Walka</h3>
-                    <div class="category-count">12 poradników</div>
-                </a>
-                <a href="#" class="category-card">
-                    <div class="category-icon">📦</div>
-                    <h3>Przedmioty</h3>
-                    <div class="category-count">15 poradników</div>
-                </a>
-                <a href="#" class="category-card">
-                    <div class="category-icon">🧠</div>
-                    <h3>Porady dla początkujących</h3>
-                    <div class="category-count">10 poradników</div>
-                </a>
-                <a href="#" class="category-card">
-                    <div class="category-icon">🗺️</div>
-                    <h3>Eksploracja</h3>
-                    <div class="category-count">9 poradników</div>
-                </a>
-                <a href="#" class="category-card">
-                    <div class="category-icon">💰</div>
-                    <h3>Zarabianie</h3>
-                    <div class="category-count">7 poradników</div>
-                </a>
-            </div>
-        </div>
-    </div>
 
-    <!-- Heist Guide Page with Interactive Map -->
-    <div id="heistGuidePage" class="page">
-        <div class="container">
-            <article class="article-container">
-                <header class="article-header">
-                    <h1>Pink Paw Heist - Kompletny przewodnik</h1>
-                    <div class="article-meta">
-                        <span>📅 Opublikowano: 2 maja 2026</span>
-                        <span>✍️ Autor: GameMaster</span>
-                        <span>⏱️ Czas czytania: 8 min</span>
-                    </div>
-                </header>
 
-                <div class="toc">
-                    <h3>📑 Spis treści</h3>
-                    <ul>
-                        <li><a href="#wprowadzenie">1. Wprowadzenie</a></li>
-                        <li><a href="#przygotowanie">2. Przygotowanie</a></li>
-                        <li><a href="#mapa">3. Interaktywna mapa lokacji</a></li>
-                        <li><a href="#strategia">4. Strategia wykonania</a></li>
-                        <li><a href="#nagrody">5. Nagrody</a></li>
-                    </ul>
-                </div>
 
-                <div class="article-content">
-                    <h2 id="wprowadzenie">Wprowadzenie</h2>
-                    <p>Pink Paw Heist to jeden z najbardziej wymagających napadów w Neverness to Everness. Wymaga precyzji, planowania i znajomości lokacji. Ten przewodnik pomoże ci przejść misję bez wykrycia.</p>
 
-                    <h2 id="przygotowanie">Przygotowanie</h2>
-                    <p>Przed rozpoczęciem napadu upewnij się, że masz:</p>
-                    <ul>
-                        <li><strong>Poziom 15+</strong> - rekomendowany minimalny poziom</li>
-                        <li><strong>Zestaw skradania</strong> - zmniejsza hałas o 40%</li>
-                        <li><strong>Narzędzia hakowania</strong> - do wyłączania kamer</li>
-                        <li><strong>Wytrych</strong> - przynajmniej 3 sztuki</li>
-                        <li><strong>Apteczka</strong> - na wypadek wykrycia</li>
-                    </ul>
 
-                    <h2 id="mapa">Interaktywna mapa lokacji</h2>
-                    <p>Poniżej znajduje się szczegółowa mapa budynku. Kliknij na punkty w legendzie aby zobaczyć ich lokalizację:</p>
-                </div>
 
-                <!-- Interactive Map Section -->
-                <div class="map-section">
-                    <h2>🗺️ Mapa Pink Paw Building</h2>
-                    <div class="map-container">
-                        <div class="map-wrapper">
-                            <!-- Placeholder map - in real implementation, use actual game map image -->
-                            <svg class="map-image" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Building outline -->
-                                <rect x="50" y="50" width="700" height="500" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="3"/>
-                                
-                                <!-- Rooms -->
-                                <rect x="70" y="70" width="200" height="150" fill="#0f0f0f" stroke="#2a2a2a" stroke-width="2"/>
-                                <rect x="290" y="70" width="200" height="150" fill="#0f0f0f" stroke="#2a2a2a" stroke-width="2"/>
-                                <rect x="510" y="70" width="220" height="150" fill="#0f0f0f" stroke="#2a2a2a" stroke-width="2"/>
-                                
-                                <rect x="70" y="240" width="200" height="150" fill="#0f0f0f" stroke="#2a2a2a" stroke-width="2"/>
-                                <rect x="290" y="240" width="200" height="150" fill="#0f0f0f" stroke="#2a2a2a" stroke-width="2"/>
-                                <rect x="510" y="240" width="220" height="150" fill="#0f0f0f" stroke="#2a2a2a" stroke-width="2"/>
-                                
-                                <rect x="70" y="410" width="660" height="120" fill="#0f0f0f" stroke="#2a2a2a" stroke-width="2"/>
-                                
-                                <!-- Room labels -->
-                                <text x="170" y="145" fill="#666" font-size="14" text-anchor="middle">Hol wejściowy</text>
-                                <text x="390" y="145" fill="#666" font-size="14" text-anchor="middle">Biura</text>
-                                <text x="620" y="145" fill="#666" font-size="14" text-anchor="middle">Sala serwera</text>
-                                <text x="170" y="315" fill="#666" font-size="14" text-anchor="middle">Pokój ochrony</text>
-                                <text x="390" y="315" fill="#666" font-size="14" text-anchor="middle">Korytarz</text>
-                                <text x="620" y="315" fill="#666" font-size="14" text-anchor="middle">Magazyn</text>
-                                <text x="400" y="470" fill="#666" font-size="14" text-anchor="middle">Skarbiec</text>
-                            </svg>
-                            
-                            <!-- Interactive markers -->
-                            <div class="map-marker" id="marker1" data-point="punkt1" style="top: 15%; left: 21%;">
-                                <div class="map-marker-label">1</div>
-                            </div>
-                            <div class="map-marker" id="marker2" data-point="punkt2" style="top: 28%; left: 35%;">
-                                <div class="map-marker-label">2</div>
-                            </div>
-                            <div class="map-marker" id="marker3" data-point="punkt3" style="top: 82%; left: 50%;">
-                                <div class="map-marker-label">3</div>
-                            </div>
-                            <div class="map-marker" id="marker4" data-point="punkt4" style="top: 52%; left: 23%;">
-                                <div class="map-marker-label">4</div>
-                            </div>
-                            <div class="map-marker" id="marker5" data-point="punkt5" style="top: 52%; left: 77%;">
-                                <div class="map-marker-label">5</div>
-                            </div>
-                        </div>
-                        
-                        <div class="legend">
-                            <h3>Legenda</h3>
-                            
-                            <div class="legend-item" data-target="punkt1">
-                                <div class="legend-item-header">
-                                    <div class="legend-number">1</div>
-                                    <div class="legend-title">Główne wejście</div>
-                                </div>
-                                <div class="legend-description">Strażnik przy drzwiach. Użyj tylnego wejścia przez wentylację.</div>
-                            </div>
-                            
-                            <div class="legend-item" data-target="punkt2">
-                                <div class="legend-item-header">
-                                    <div class="legend-number">2</div>
-                                    <div class="legend-title">Kamery bezpieczeństwa</div>
-                                </div>
-                                <div class="legend-description">4 kamery w biurach. Zhackuj panel kontrolny w pokoju ochrony.</div>
-                            </div>
-                            
-                            <div class="legend-item" data-target="punkt3">
-                                <div class="legend-item-header">
-                                    <div class="legend-number">3</div>
-                                    <div class="legend-title">Skarbiec</div>
-                                </div>
-                                <div class="legend-description">Cel misji. Wymaga 3 kluczy elektronicznych z różnych lokacji.</div>
-                            </div>
-                            
-                            <div class="legend-item" data-target="punkt4">
-                                <div class="legend-item-header">
-                                    <div class="legend-number">4</div>
-                                    <div class="legend-title">Strażnicy</div>
-                                </div>
-                                <div class="legend-description">2 patrolujących strażników. Patrol co 45 sekund.</div>
-                            </div>
-                            
-                            <div class="legend-item" data-target="punkt5">
-                                <div class="legend-item-header">
-                                    <div class="legend-number">5</div>
-                                    <div class="legend-title">Magazyn</div>
-                                </div>
-                                <div class="legend-description">Znaj dziesz tu apteczki i dodatkowy ekwipunek.</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="article-content">
-                    <h2 id="strategia">Strategia wykonania</h2>
-                    <p>Najlepsza droga do ukończenia misji bez wykrycia:</p>
-                    <ol>
-                        <li><strong>Wejście przez wentylację</strong> - Unikniesz strażnika przy głównym wejściu</li>
-                        <li><strong>Wyłącz kamery</strong> - Skieruj się do pokoju ochrony i zhackuj panel</li>
-                        <li><strong>Zbierz klucze</strong> - Pierwszy w biurach, drugi w magazynie, trzeci w pokoju ochrony</li>
-                        <li><strong>Otwórz skarbiec</strong> - Użyj wszystkich trzech kluczy jednocześnie</li>
-                        <li><strong>Wyjście</strong> - Najszybsza droga przez magazyn i okno awaryjne</li>
-                    </ol>
-
-                    <h2 id="nagrody">Nagrody</h2>
-                    <p>Za ukończenie Pink Paw Heist otrzymasz:</p>
-                    <ul>
-                        <li>15,000 Credits</li>
-                        <li>Rzadki skin broni "Pink Phantom"</li>
-                        <li>Osiągnięcie "Master Thief"</li>
-                        <li>+500 punktów reputacji w gildii</li>
-                    </ul>
-
-                    <p style="margin-top: var(--space-2xl); padding: var(--space-lg); background: var(--color-surface); border-left: 4px solid var(--color-accent); border-radius: var(--radius-sm);">
-                        <strong>💡 Pro tip:</strong> Jeśli wykonasz misję bez żadnego alarmu (Perfect Stealth), otrzymasz dodatkowe 5,000 Credits i unikalny tytuł "Shadow Master".
-                    </p>
-                </div>
-            </article>
-        </div>
-    </div>
-
-    <!-- About Page -->
-    <div id="aboutPage" class="page">
-        <div class="container">
-            <article class="article-container">
-                <h1>O grze Neverness to Everness</h1>
-                <p style="font-size: 1.1rem; color: var(--color-text-muted); margin-bottom: var(--space-xl);">
-                    Neverness to Everness to innowacyjna gra akcji RPG łącząca elementy skradania, eksploracji i dynamicznej walki w futurystycznym świecie pełnym tajemnic.
-                </p>
-
-                <h2>Główne cechy gry</h2>
-                <ul>
-                    <li><strong>Otwarty świat</strong> - Eksploruj ogromne miasto Hethereau pełne sekretów</li>
-                    <li><strong>System napadów</strong> - Planuj i wykonuj skomplikowane kradzieże</li>
-                    <li><strong>Dynamiczna walka</strong> - Płynne combo i system uników</li>
-                    <li><strong>Rozwój postaci</strong> - Rozbudowany system umiejętności i ekwipunku</li>
-                    <li><strong>Fabuła</strong> - Wciągająca historia z wieloma zakończeniami</li>
-                </ul>
-
-                <h2>O tym przewodniku</h2>
-                <p>
-                    Ten guide hub został stworzony przez społeczność graczy, aby pomóc nowym i doświadczonym graczom w odkrywaniu wszystkich tajemnic Neverness to Everness. Regularnie dodajemy nowe poradniki i aktualizujemy istniejące wraz z nowymi odkryciami społeczności.
-                </p>
-            </article>
-        </div>
-    </div>
     <script src="script.js"></script>
 </body>
 </html>
