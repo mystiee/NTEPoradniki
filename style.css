@@ -393,6 +393,10 @@
             margin: var(--space-2xl) 0;
             margin-left: 10%;
             margin-right: 10%;
+            position: relative;
+            width: 80%;
+            max-width: 100vw;
+            overflow: hidden;
         }
         
         .map-section h2 {
