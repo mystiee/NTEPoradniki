@@ -149,12 +149,115 @@ items.forEach(item => {
         items.forEach(i => i.classList.remove("active"));
         item.classList.add("active");
 
-        if (item.dataset.view === "top") {
+        const view = item.dataset.view;
+
+        if (view === "top") {
             img1.style.opacity = "1";
-            img2.style.opacity = "0.3";
-        } else {
-            img1.style.opacity = "0.3";
+            img2.style.opacity = "0.15";
+
+        } else if (view === "bottom") {
+            img1.style.opacity = "0.15";
+            img2.style.opacity = "1";
+
+        } else if (view === "both") {
+            // 🔥 CAŁOŚĆ
+            img1.style.opacity = "1";
             img2.style.opacity = "1";
         }
     });
+});
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const img1 = document.querySelector(".img1");
+    const img2 = document.querySelector(".img2");
+
+    const fsImg1 = document.querySelector(".fs-img1");
+    const fsImg2 = document.querySelector(".fs-img2");
+
+    const fullscreen = document.getElementById("fullscreen");
+    const fullscreenBtn = document.getElementById("fullscreenBtn");
+
+    const items = document.querySelectorAll(".goradol-item");
+
+    let currentView = "both";
+
+    // 🔥 MAPA – zmiana widoku
+    function updateView(view) {
+
+        if (view === "top") {
+            img1.style.opacity = "1";
+            img2.style.opacity = "0.3";
+
+        } else if (view === "bottom") {
+            img1.style.opacity = "0.3";
+            img2.style.opacity = "1";
+
+        } else {
+            img1.style.opacity = "1";
+            img2.style.opacity = "1";
+        }
+    }
+
+    // 🔥 klik przycisków
+    items.forEach(item => {
+        item.addEventListener("click", () => {
+
+            items.forEach(i => i.classList.remove("active"));
+            item.classList.add("active");
+
+            currentView = item.dataset.view;
+            updateView(currentView);
+        });
+    });
+
+    // 🔥 FULLSCREEN OPEN (z animacją)
+    fullscreenBtn.addEventListener("click", () => {
+
+        fsImg1.src = img1.src;
+        fsImg2.src = img2.src;
+
+        fsImg1.style.display = "block";
+        fsImg2.style.display = "block";
+
+        if (currentView === "top") {
+
+            fsImg1.style.opacity = "1";
+            fsImg2.style.opacity = "0.3";
+
+        } else if (currentView === "bottom") {
+
+            fsImg1.style.opacity = "0.3";
+            fsImg2.style.opacity = "1";
+
+        } else {
+
+            fsImg1.style.opacity = "1";
+            fsImg2.style.opacity = "1";
+        }
+
+        fullscreen.style.display = "flex";
+
+        // 🔥 fade-in efekt
+        requestAnimationFrame(() => {
+            fullscreen.classList.add("show");
+        });
+    });
+
+    // 🔥 FULLSCREEN CLOSE (z animacją)
+    fullscreen.addEventListener("click", () => {
+
+        fullscreen.classList.remove("show");
+
+        setTimeout(() => {
+            fullscreen.style.display = "none";
+        }, 200);
+    });
+
+    // 🔥 start
+    updateView(currentView);
 });
