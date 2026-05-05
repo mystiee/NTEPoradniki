@@ -67,10 +67,10 @@
             </div>
 
             <div class="pietra">
-                <div class="pietra-item active">Pierwsze</div>
-                <div class="pietra-item">Drugie</div>
-                <div class="pietra-item">Trzecie</div>
-                <div class="pietra-item">Skarbiec</div>
+                <div class="pietra-item active" data-view="1">Pierwsze</div>
+                <div class="pietra-item" data-view="2">Drugie</div>
+                <div class="pietra-item" data-view="3">Trzecie</div>
+                <div class="pietra-item" data-view="4">Skarbiec</div>
             </div>
 
             <div class="goradol">
@@ -84,64 +84,86 @@
                     <div class="fullscreen-btn" id="fullscreenBtn">
                         ⛶
                     </div>
-                    <img src="img/3g.png" class="img1" alt="1">
-                    <img src="img/3d.png" class="img2" alt="2">                
-                    <!-- Interactive markers -->
-                    <div class="map-marker" id="marker1" data-point="punkt1" style="top: 5%; left: 5%;">
-                        <div class="map-marker-label">1</div>
+                    <div class="zoom-controls">
+                        <div id="zoomIn">+</div>
+                        <div id="zoomOut">−</div>
                     </div>
-                    <div class="map-marker" id="marker2" data-point="punkt2" style="top: 10%; left: 10%;">
-                        <div class="map-marker-label">2</div>
-                    </div>
-                    <div class="map-marker" id="marker3" data-point="punkt3" style="top: 50%; left: 50%;">
-                        <div class="map-marker-label">3</div>
-                    </div>
-                    <div class="map-marker" id="marker4" data-point="punkt4" style="top: 0%; left: 50%;">
-                        <div class="map-marker-label">4</div>
-                    </div>
-                    <div class="map-marker" id="marker5" data-point="punkt5" style="top: 50%; left: 0%;">
-                        <div class="map-marker-label">5</div>
+                   <div class="map-layer">
+                        <img src="img/1g.png" class="img-1g">
+                        <img src="img/1d.png" class="img-1d">
+
+                        <img src="img/2g.png" class="img-2g">
+                        <img src="img/2d.png" class="img-2d">
+
+                        <img src="img/3g.png" class="img-3g">
+                        <img src="img/3d.png" class="img-3d">
+
+                        <img src="img/4.png" class="img-4">
+                        <div class="map-marker" data-point="punkt1" data-floor="1" style="top:5%; left:5%;">
+                            <div class="map-marker-label">1</div>
+                        </div>
+
+                        <div class="map-marker" data-point="punkt2" data-floor="2" style="top:10%; left:10%;">
+                            <div class="map-marker-label">2</div>
+                        </div>
+
+                        <div class="map-marker" data-point="punkt3" data-floor="3" style="top:50%; left:50%;">
+                            <div class="map-marker-label">3</div>
+                        </div>
+                        <div class="map-marker" data-point="punkt4" data-floor="4" style="top:20%; left:70%;">
+                            <div class="map-marker-label">4</div>
+                        </div>
+
+                        <div class="map-marker" data-point="punkt5" data-floor="4" style="top:80%; left:40%;">
+                            <div class="map-marker-label">5</div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="legend">
                     <h3>Legenda</h3>
-                    <div class="legend-item" data-target="punkt1">
+
+                    <div class="legend-item" data-target="punkt1" data-floor="1">
                         <div class="legend-item-header">
                             <div class="legend-number">1</div>
                             <div class="legend-title">Główne wejście</div>
                         </div>
                         <div class="legend-description">Strażnik przy drzwiach. Użyj tylnego wejścia przez wentylację.</div>
                     </div>               
-                    <div class="legend-item" data-target="punkt2">
+
+                    <div class="legend-item" data-target="punkt2" data-floor="2">
                         <div class="legend-item-header">
                             <div class="legend-number">2</div>
                             <div class="legend-title">Kamery bezpieczeństwa</div>
                         </div>
                         <div class="legend-description">4 kamery w biurach. Zhackuj panel kontrolny w pokoju ochrony.</div>
                     </div>                    
-                    <div class="legend-item" data-target="punkt3">
+
+                    <div class="legend-item" data-target="punkt3" data-floor="3">
                         <div class="legend-item-header">
                             <div class="legend-number">3</div>
                             <div class="legend-title">Skarbiec</div>
                         </div>
                         <div class="legend-description">Cel misji. Wymaga 3 kluczy elektronicznych z różnych lokacji.</div>
                     </div>                  
-                    <div class="legend-item" data-target="punkt4">
+
+                    <div class="legend-item" data-target="punkt4" data-floor="4">
                         <div class="legend-item-header">
                             <div class="legend-number">4</div>
                             <div class="legend-title">Strażnicy</div>
                         </div>
                         <div class="legend-description">2 patrolujących strażników. Patrol co 45 sekund.</div>
                     </div>                   
-                    <div class="legend-item" data-target="punkt5">
+
+                    <div class="legend-item" data-target="punkt5" data-floor="4">
                         <div class="legend-item-header">
                             <div class="legend-number">5</div>
                             <div class="legend-title">Magazyn</div>
                         </div>
-                        <div class="legend-description">Znaj dziesz tu apteczki i dodatkowy ekwipunek.</div>
+                        <div class="legend-description">Znajdziesz tu apteczki i dodatkowy ekwipunek.</div>
                     </div>
-                    </div>
+
+                </div>
             </div>
         </div>
     </div>

@@ -438,7 +438,7 @@ body {
 .goradol {
     text-align: center;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 10px;
     width: 100%;
 }
@@ -460,35 +460,53 @@ body {
 
 .map-marker {
     position: absolute;
-    width: 32px;
-    height: 32px;
-    background: var(--color-accent);
-    border: 3px solid var(--color-bg);
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    transform: translate(-50%, -50%);
+    background: var(--color-accent);
+    transform: translate(-50%, -50%) scale(0.8);
     cursor: pointer;
-    transition: all 0.3s;
-    opacity: 0.4;
-    box-shadow: 0 0 0 0 rgba(146, 194, 134, 0.7);
+    opacity: 0;
+    pointer-events: auto;
+
+    border: none;
+
+    box-shadow: 0 0 0 2px rgba(146,194,134,0.25), 0 2px 8px rgba(0,0,0,0.35);
+    transition: all 0.2s ease;
+}
+
+.map-marker::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    background: rgba(146,194,134,0.12);
+    opacity: 0;
+    transition: 0.2s;
 }
 
 .map-marker.active {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1.3);
-    animation: pulse 2s infinite;
     z-index: 10;
+    box-shadow: 0 0 0 6px rgba(146,194,134,0.08), 0 6px 16px rgba(0,0,0,0.45);
+    animation: pulse 2s infinite;
+}
+
+.map-marker.active::after {
+    opacity: 1;
+    animation: ripple 2s infinite;
 }
 
 @keyframes pulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(146, 194, 134, 0.7);
-    }
-    70% {
-        box-shadow: 0 0 0 15px rgba(146, 194, 134, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(146, 194, 134, 0);
-    }
+    0% { box-shadow: 0 0 0 0 rgba(146,194,134,0.45); }
+    70% { box-shadow: 0 0 0 12px rgba(146,194,134,0); }
+    100% { box-shadow: 0 0 0 0 rgba(146,194,134,0); }
+}
+
+@keyframes ripple {
+    0% { transform: scale(0.8); opacity: 0.5; }
+    100% { transform: scale(2.2); opacity: 0; }
 }
 
 .map-marker-label {
@@ -496,9 +514,9 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: var(--color-bg);
+    font-size: 9px;
     font-weight: 700;
-    font-size: 0.85rem;
+    color: #0f0f0f;
     pointer-events: none;
 }
 
@@ -518,6 +536,7 @@ body {
     grid-template-columns: 6.5fr 3.5fr;
     width: 100%;
     gap: 20px;
+    overflow: hidden;
 }
 @media (max-width: 768px) {
     .mapa-box {
@@ -532,19 +551,41 @@ body {
     background: #2b2c30;
     overflow: hidden;
     border-radius: 10px;
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
 
+.mapa:active {
+    cursor: grabbing;
 }
 
 .img1, .img2 {
     position: absolute;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: contain;
-    transition: opacity 0.3s ease;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    transition: opacity 0.25s ease;
 }
 
+.img-1g, .img-1d,
+.img-2g, .img-2d,
+.img-3g, .img-3d,
+.img-4 {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+    user-select: none;
+    transition: opacity 0.25s ease;
+}
 .legend {
     width: 100%;
     max-width: 100%;
@@ -788,27 +829,57 @@ body {
     position: absolute;
     top: 10px;
     right: 10px;
-
     width: 40px;
     height: 40px;
-
     background: rgba(0,0,0,0.5);
     color: white;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     border-radius: 8px;
-
     cursor: pointer;
     font-size: 18px;
-
-    z-index: 10;
+    z-index: 20;
     transition: 0.2s;
 }
 
 .fullscreen-btn:hover {
     background: rgba(0,0,0,0.7);
     transform: scale(1.05);
+}
+
+.zoom-controls {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 20;
+}
+
+.zoom-controls div {
+    width: 38px;
+    height: 38px;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 20px;
+    user-select: none;
+    transition: 0.2s;
+}
+
+.zoom-controls div:hover {
+    background: rgba(0,0,0,0.7);
+    transform: scale(1.05);
+}
+
+.map-layer {
+    position: absolute;
+    inset: 0;
+    transform-origin: center;
 }
