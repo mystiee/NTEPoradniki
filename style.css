@@ -207,6 +207,8 @@ body {
     padding: var(--space-lg);
     transition: all 0.2s;
     cursor: pointer;
+    height: 500px;
+    
 }
 
 .card:hover {
@@ -217,8 +219,17 @@ body {
 }
 
 .card-icon {
-    font-size: 2rem;
-    margin-bottom: var(--space-md);
+    grid-template-columns: 1fr 8fr 1fr;
+    display: grid;
+   
+}
+
+.card-wkrotce {
+    height: 100%;
+    grid-template-rows: 1fr 1fr 1fr;
+    display: grid;
+    align-items: center;
+  
 }
 
 .card h3 {
@@ -460,53 +471,52 @@ body {
 
 .map-marker {
     position: absolute;
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
     background: var(--color-accent);
-    transform: translate(-50%, -50%) scale(0.8);
+    transform: translate(-50%, -50%) scale(1);
     cursor: pointer;
-    opacity: 0;
-    pointer-events: auto;
+    opacity: 0; /* ukrywane tylko przez JS display */
+    transition: transform 0.2s ease, opacity 0.2s ease;
 
-    border: none;
-
-    box-shadow: 0 0 0 2px rgba(146,194,134,0.25), 0 2px 8px rgba(0,0,0,0.35);
-    transition: all 0.2s ease;
-}
-
-.map-marker::after {
-    content: "";
-    position: absolute;
-    inset: -6px;
-    border-radius: 50%;
-    background: rgba(146,194,134,0.12);
-    opacity: 0;
-    transition: 0.2s;
+    
 }
 
 .map-marker.active {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1.3);
+    transform: translate(-50%, -50%) scale(1.4);
     z-index: 10;
-    box-shadow: 0 0 0 6px rgba(146,194,134,0.08), 0 6px 16px rgba(0,0,0,0.45);
-    animation: pulse 2s infinite;
 }
 
+/* PULS */
 .map-marker.active::after {
-    opacity: 1;
-    animation: ripple 2s infinite;
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+
 }
 
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(146,194,134,0.45); }
-    70% { box-shadow: 0 0 0 12px rgba(146,194,134,0); }
-    100% { box-shadow: 0 0 0 0 rgba(146,194,134,0); }
-}
-
+/* ripple */
 @keyframes ripple {
-    0% { transform: scale(0.8); opacity: 0.5; }
-    100% { transform: scale(2.2); opacity: 0; }
+    0% {
+        transform: scale(0.8);
+        opacity: 0.6;
+    }
+    100% {
+        transform: scale(2.2);
+        opacity: 0;
+    }
+}
+
+.map-marker.pulse::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    background: rgba(146,194,134,0.15);
+    animation: ripple 1.6s infinite;
 }
 
 .map-marker-label {
@@ -514,7 +524,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 9px;
+    font-size: 10px;
     font-weight: 700;
     color: #0f0f0f;
     pointer-events: none;
@@ -882,4 +892,8 @@ body {
     position: absolute;
     inset: 0;
     transform-origin: center;
+}
+
+.margin0 p {
+    margin: 0px 0px 0px 0px;
 }
