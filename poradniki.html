@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neverness to Everness - Poradniki</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div></div>
+        <div style="display: flex; justify-content: flex-end; padding-right: 10px;">
+            <img src="img/logonte.png" alt="logo" style="width: 60px; height: 60px; margin: 10px 10px 10px 10px;" >
+        </div>
+        
+        <div style="display: flex; justify-content: flex-start;">
+            <a href="index.html" class="logo">
+                Neverness Guide
+            </a>
+        </div>
+        <div class="navbar-container">
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="active">Strona główna</a></li>
+                <li><a href="poradniki.html">Poradniki</a></li>
+            </ul>
+        </div>
+    </nav>
+
+<!-- Categories Page -->
+    <div id="categoriesPage">
+        <div class="container">
+            <section class="hero">
+                <h1>Kategorie poradników</h1>
+                <p>Wybierz kategorię aby przeglądać tematyczne przewodniki</p>
+            </section>
+
+            <div class="categories-grid">
+
+
+                <a href="napady.html" class="category-card" onclick="showPage('heist-guide')">
+                    <div class="category-icon">💰</div>
+                        <h3>Napady</h3>
+                    <div class="category-count">1  poradników</div>
+                </a>
+
+                <a href="przedmioty.html" class="category-card">
+                    <div class="category-icon">📦</div>
+                        <h3>Przedmioty</h3>
+                    <div class="category-count">0 poradników</div>
+                </a>
+
+                <a href="reakcje.html" class="category-card">
+                    <div class="category-icon">🌟</div>
+                        <h3>Elementy i reakcje</h3>
+                    <div class="category-count">0 poradników</div>
+                </a>
+
+                <a href="timery.html" class="category-card">
+                    <div class="category-icon">🕑</div>
+                        <h3>Timery resetów</h3>
+                    <div class="category-count">1 poradników</div>
+                </a>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+   
+    <script src="script.js"></script>
+</body>
+</html>
