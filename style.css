@@ -458,12 +458,6 @@ body {
     color: var(--color-accent-light);
 }
 
-.map-container {
-    display: grid;
-    grid-template-rows: auto auto auto 1fr;
-    gap: 40px;
-}
-
 .tytul {
     text-align: center;
 }
@@ -493,73 +487,6 @@ body {
     }
 }
 
-.map-image {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-.map-marker {
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background: var(--color-accent);
-    transform: translate(-50%, -50%) scale(1);
-    cursor: pointer;
-    opacity: 0; /* ukrywane tylko przez JS display */
-    transition: transform 0.2s ease, opacity 0.2s ease;
-
-    
-}
-
-.map-marker.active {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.4);
-    z-index: 10;
-}
-
-/* PULS */
-.map-marker.active::after {
-    content: "";
-    position: absolute;
-    inset: -6px;
-    border-radius: 50%;
-
-}
-
-/* ripple */
-@keyframes ripple {
-    0% {
-        transform: scale(0.8);
-        opacity: 0.6;
-    }
-    100% {
-        transform: scale(2.2);
-        opacity: 0;
-    }
-}
-
-.map-marker.pulse::after {
-    content: "";
-    position: absolute;
-    inset: -6px;
-    border-radius: 50%;
-    background: rgba(146,194,134,0.15);
-    animation: ripple 1.6s infinite;
-}
-
-.map-marker-label {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 10px;
-    font-weight: 700;
-    color: #0f0f0f;
-    pointer-events: none;
-}
-
 .napadtyt {
         font-size: 50px;
         font-weight: bold;
@@ -571,73 +498,6 @@ body {
     }
 }
 
-.mapa-box {
-    display: grid;
-    grid-template-columns: 6.5fr 3.5fr;
-    width: 100%;
-    gap: 20px;
-    overflow: hidden;
-}
-@media (max-width: 768px) {
-    .mapa-box {
-        grid-template-columns: 1fr;
-    }
-}
-
-.mapa {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    background: #2b2c30;
-    overflow: hidden;
-    border-radius: 10px;
-    cursor: grab;
-    touch-action: none;
-    user-select: none;
-    -webkit-user-select: none;
-}
-
-.mapa:active {
-    cursor: grabbing;
-}
-
-.img1, .img2 {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    pointer-events: none;
-    user-select: none;
-    -webkit-user-drag: none;
-    transition: opacity 0.25s ease;
-}
-
-.img-1g, .img-1d,
-.img-2g, .img-2d,
-.img-3g, .img-3d,
-.img-4 {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    pointer-events: none;
-    user-select: none;
-    transition: opacity 0.25s ease;
-}
-.legend {
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-}
-        
-.legend h3 {
-    font-family: var(--font-heading);
-    font-size: 1.25rem;
-    margin-bottom: var(--space-md);
-    color: var(--color-accent);
-}
 .pietra-item {
     padding: var(--space-md);
     margin-bottom: var(--space-sm);
@@ -717,7 +577,6 @@ body {
 .legend-number {
     width: 28px;
     height: 28px;
-    background: var(--color-accent);
     color: var(--color-bg);
     border-radius: 50%;
     display: flex;
@@ -822,47 +681,193 @@ body {
     margin-right: 10%;
 }
 
-.fullscreen {
-    position: fixed;
-    inset: 0;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.3); /* 🔥 lekkie przyciemnienie */
-    backdrop-filter: blur(3px);     /* 🔥 opcjonalny blur (bardzo ładny efekt) */
-    z-index: 9999;
-    opacity: 0;
-    transition: opacity 0.2s ease;
+.margin0 p {
+    margin: 0px 0px 0px 0px;
 }
 
-.fullscreen.show {
+.timerdiv1 {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    margin: 0;
+    padding: 0;
+}
+
+.timerdiv1 span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.discord {
+    font-size: 30px;
+    color: #92c286;
+}
+
+.testdiv {
+    border: solid white 1px;
+}
+
+.map-marker.level-down {
+    opacity: 0.35;
+}
+
+.map-marker.level-up {
     opacity: 1;
 }
 
-
-.fullscreen-content {
+.mapa {
     position: relative;
-    width: min(100vw, 100vh);
-    height: min(100vw, 100vh);
-    aspect-ratio: 1 / 1;
-
+    width: 100%;
+    aspect-ratio: 1600 / 1450; /* prawdziwe proporcje mapy */
     background: #2b2c30;
-    border-radius: 12px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
     overflow: hidden;
+    border-radius: 10px;
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
 }
 
-.fs-img {
+.mapa:active {
+    cursor: grabbing;
+}
+
+.img1, .img2 {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: contain;
-    transition: opacity 0.3s ease;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    transition: opacity 0.25s ease;
+}
+
+.img-1g, .img-1d,
+.img-2g, .img-2d,
+.img-3g, .img-3d,
+.img-4 {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+    user-select: none;
+    transition: opacity 0.25s ease;
+}
+
+/* --- MAPA I WARSTWY --- */
+.map-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* obraz i markery w tych samych granicach */
+}
+
+/* Obraz mapy — referencja dla markerów */
+.map-layer img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* klucz — identyczne skalowanie jak fullscreen */
+    pointer-events: none;
+    user-select: none;
+    transition: opacity 0.25s ease;
+}
+
+/* --- MARKERY --- */
+.map-marker {
+    position: absolute; /* pozycjonowanie względem .map-layer */
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%); /* centrowanie */
+    cursor: pointer;
+    opacity: 0;
+    z-index: 10;
+    transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.map-marker.active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.4);
+}
+
+/* PULS */
+.map-marker.active::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+
+}
+
+/* ripple */
+@keyframes ripple {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.6;
+    }
+    100% {
+        transform: scale(2.2);
+        opacity: 0;
+    }
+}
+
+.map-marker.pulse::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    background: var(--pulse-color, #92c286); /* domyślnie zielony */
+    animation: ripple 1.6s infinite;
+}
+
+.map-marker-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 10px;
+    font-weight: 700;
+    color: #0f0f0f;
+    pointer-events: none;
+}
+
+
+.mapa-box {
+    display: grid;
+    grid-template-columns: 6.5fr 3.5fr;
+    width: 100%;
+    gap: 20px;
+    overflow: hidden;
+}
+@media (max-width: 768px) {
+    .mapa-box {
+        grid-template-columns: 1fr;
+    }
+}
+
+.map-container {
+    display: grid;
+    grid-template-rows: auto auto auto 1fr;
+    gap: 40px;
+}
+
+.legend {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+        
+.legend h3 {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    margin-bottom: var(--space-md);
+    color: var(--color-accent);
 }
 
 .fullscreen-btn {
@@ -918,30 +923,238 @@ body {
     transform: scale(1.05);
 }
 
-.map-layer {
+
+
+
+
+
+/* Fullscreen overlay — domyślnie ukryty i nie wpływa na layout strony */
+#fullscreen {
+  display: none;
+  position: fixed;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.92); /* mocniejsze przyciemnienie */
+  backdrop-filter: blur(6px);       /* silniejsze rozmycie tła */
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 9999;
+  pointer-events: none;
+  transition: background 200ms ease, opacity 200ms ease;
+}
+
+/* klasa pokazująca fullscreen */
+#fullscreen.show {
+  display: flex;
+  pointer-events: auto;
+}
+
+/* kontener obrazów wewnątrz fullscreen */
+#fullscreen .fullscreen-content {
+    position: relative;
+    width: 100%;          /* 🔥 identycznie jak mapa główna */
+    max-width: 55vw;      /* 🔥 ograniczenie, ale nie wymuszenie */
+
+    aspect-ratio: 1600 / 1450;
+    overflow: hidden;
+    background: #2b2c30;
+    border-radius: 8px;
+
+}
+
+/* obrazy w fullscreen */
+#fullscreen .fs-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+
+}
+
+/* kontener na sklonowane markery (nad obrazami) */
+#fullscreen .fs-markers {
     position: absolute;
     inset: 0;
-    transform-origin: center;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 20;
 }
 
-.margin0 p {
-    margin: 0px 0px 0px 0px;
+/* bazowa pozycja markerów w fullscreen */
+#fullscreen .fs-marker {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    pointer-events: auto;
+    z-index: 30;
+    transition: opacity 160ms ease;
 }
 
-.timerdiv1 {
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
-    margin: 0;
-    padding: 0;
+/* animacja pulse z pełnym transform — NIE nadpisuje translate */
+@keyframes fs-pulse {
+    0%   { transform: translate(-50%, -50%) scale(1);   opacity: 1; }
+    50%  { transform: translate(-50%, -50%) scale(1.12); opacity: 0.85; }
+    100% { transform: translate(-50%, -50%) scale(1);   opacity: 1; }
 }
 
-.timerdiv1 span {
+/* pulse w fullscreen */
+#fullscreen .fs-marker.fs-pulse {
+    animation: fs-pulse 1.2s infinite;
+}
+
+/* przycisk zamykania wewnątrz fullscreen */
+#fullscreen .fs-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 40;
+  pointer-events: auto;
+}
+#fullscreen .fs-close:hover { background: rgba(0,0,0,0.8); }
+
+/* Drobne dopasowania responsywne */
+@media (max-width: 700px) {
+  #fullscreen .fullscreen-content { max-width: 98vw; max-height: 98vh; }
+  #fullscreen .fs-close { top: 8px; right: 8px; width: 36px; height: 36px; font-size: 16px; }
+}
+
+#fullscreen .fs-sidepanel {
+    position: fixed;
+    right: 200px;
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 9999;
 }
 
-.discord {
-    font-size: 30px;
-    color: #92c286;
+#fullscreen .fs-pietra,
+#fullscreen .fs-goradol {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+@media (max-width: 768px) {
+
+    /* PANEL NAD MAPĄ — BEZ ZMIAN */
+    #fullscreen .fs-sidepanel {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+
+        transform: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+
+        padding: 8px;
+        background: rgba(0,0,0,0.75);
+        z-index: 99999;
+    }
+
+    /* PIĘTRA — RZĄD */
+    #fullscreen .fs-pietra {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 6px;
+
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    #fullscreen .fs-pietra::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* 🔥 ZMNIEJSZONE PRZYCISKI PIĘTER */
+    #fullscreen .fs-pietra-item {
+        flex: 0 0 auto;
+        padding: 6px 10px;      /* 🔥 mniejsze */
+        font-size: 12px;        /* 🔥 mniejsze */
+        border-radius: 6px;     /* 🔥 bardziej kompaktowe */
+        white-space: nowrap;
+    }
+
+    /* GÓRA/DÓŁ — RZĄD */
+    #fullscreen .fs-goradol {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 6px;
+    }
+
+    /* 🔥 ZMNIEJSZONE PRZYCISKI GÓRA/DÓŁ */
+    #fullscreen .fs-goradol-item {
+        flex: 1;
+        padding: 6px 0;         /* 🔥 mniejsze */
+        font-size: 12px;        /* 🔥 mniejsze */
+        border-radius: 6px;
+    }
+}
+
+
+
+
+#fullscreen .fs-pietra-item,
+#fullscreen .fs-goradol-item {
+    padding: 10px 14px;
+    background: rgba(0,0,0,0.55);
+    border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+    transition: 0.2s;
+}
+
+#fullscreen .fs-pietra-item.active,
+#fullscreen .fs-goradol-item.active {
+    border-color: var(--color-accent);
+    background: rgba(0,0,0,0.8);
+}
+
+/* GÓRA zawsze nad DOŁEM */
+.map-layer img[class*="g"] {
+    z-index: 2;
+}
+
+.map-layer img[class*="d"] {
+    z-index: 1;
+}
+
+/* Skarbiec nad wszystkim */
+.map-layer .img-4 {
+    z-index: 3;
+}
+
+/* FULLSCREEN — GÓRA NAD DOŁEM */
+#fullscreen .fs-img1 {
+    z-index: 2;
+    position: absolute;
+}
+
+#fullscreen .fs-img2 {
+    z-index: 1;
+    position: absolute;
 }

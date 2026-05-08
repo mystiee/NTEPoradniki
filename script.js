@@ -30,11 +30,218 @@ document.addEventListener("DOMContentLoaded", () => {
     // =========================
 
     const layers = {
-        "1": { g: ".img-1g", d: ".img-1d" },
+        "1": { single: ".img-1" },
         "2": { g: ".img-2g", d: ".img-2d" },
         "3": { g: ".img-3g", d: ".img-3d" },
         "4": { single: ".img-4" }
     };
+
+
+
+
+// --- FS MARKERS: bezpieczna integracja markerów z fullscreen ---
+(function () {
+  const fullscreenEl = document.getElementById('fullscreen');
+  const fsMarkersContainer = fullscreenEl ? fullscreenEl.querySelector('.fs-markers') : null;
+  const fsCloseBtn = fullscreenEl ? fullscreenEl.querySelector('#fsClose') : null;
+  const fullscreenBtnEl = document.getElementById('fullscreenBtn');
+
+  // pomocniczne: znajdź wszystkie oryginalne markery (na mapie)
+  function getAllMarkers() {
+    return Array.from(document.querySelectorAll('.map-marker'));
+  }
+
+  // tworzy klon markera do fullscreen
+  function createFsClone(orig) {
+    const clone = orig.cloneNode(true);
+    clone.classList.add('fs-marker');
+    clone.removeAttribute('id');
+    clone.onclick = null;
+    return clone;
+  }
+
+  // oblicza opacity wg aktualnego widoku i poziomu markera
+  function computeOpacityFor(orig, currentViewLocal, currentFloorLocal) {
+    if (currentFloorLocal === '4') return '1';
+    const level = orig.dataset.level;
+    if (currentViewLocal === 'top') return (level === 'down') ? '0.15' : '1';
+    if (currentViewLocal === 'bottom') return (level === 'up') ? '0.15' : '1';
+    return '1';
+  }
+
+  // wypełnia kontener fullscreen klonami widocznych markerów
+  function populateFsMarkers(currentViewLocal, currentFloorLocal) {
+    if (!fsMarkersContainer || !fullscreenEl) return;
+    fsMarkersContainer.innerHTML = '';
+
+    const visibleMarkers = getAllMarkers().filter(m => m.classList.contains('active'));
+    if (!visibleMarkers.length) return;
+
+    // kontener mapy – tu siedzą markery i obrazy
+    const mapLayer = document.querySelector('.map-layer');
+    if (!mapLayer) return;
+    const mapRect = mapLayer.getBoundingClientRect();
+
+    // kontener fullscreen, względem którego pozycjonujemy klony
+    const fsContent = fullscreenEl.querySelector('.fullscreen-content');
+    if (!fsContent) return;
+    const fsRect = fsContent.getBoundingClientRect();
+
+    visibleMarkers.forEach(orig => {
+      const clone = createFsClone(orig);
+
+      // pozycja środka oryginalnego markera na mapie
+      const oRect = orig.getBoundingClientRect();
+      const centerX = oRect.left + oRect.width / 2;
+      const centerY = oRect.top + oRect.height / 2;
+
+      // pozycja względna 0–1 w map-layer
+      const relX = (centerX - mapRect.left) / mapRect.width;
+      const relY = (centerY - mapRect.top) / mapRect.height;
+
+      // pozycja w fullscreen jako % kontenera fullscreen
+      clone.style.left = (relX * 100) + '%';
+      clone.style.top  = (relY * 100) + '%';
+      clone.style.transform = 'translate(-50%, -50%)';
+
+      // opacity wg widoku
+      clone.style.opacity = computeOpacityFor(orig, currentViewLocal, currentFloorLocal);
+
+      // pulse tylko jako fs-pulse
+      clone.classList.remove('pulse');
+      if (orig.classList.contains('pulse')) {
+        clone.classList.add('fs-pulse');
+      }
+
+      // zachowaj data-* atrybuty
+      clone.dataset.point = orig.dataset.point;
+      clone.dataset.floor = orig.dataset.floor;
+      clone.dataset.level = orig.dataset.level;
+
+      // kliknięcie w klon
+      clone.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const point = clone.dataset.point;
+        if (!point) return;
+
+        document.querySelectorAll(`.map-marker[data-point="${point}"]`)
+          .forEach(m => m.classList.add('pulse'));
+
+        document.querySelectorAll('.legend-item')
+          .forEach(li => li.classList.toggle('active', li.dataset.target === point));
+      });
+
+      fsMarkersContainer.appendChild(clone);
+    });
+  }
+
+  // usuwa klony
+  function clearFsMarkers() {
+    if (!fsMarkersContainer) return;
+    fsMarkersContainer.innerHTML = '';
+  }
+
+  // odświeża opacity klonów (np. po zmianie currentView)
+  function refreshFsMarkerOpacity(currentViewLocal, currentFloorLocal) {
+    if (!fsMarkersContainer) return;
+    fsMarkersContainer.querySelectorAll('.fs-marker').forEach(clone => {
+      const orig = document.querySelector(`.map-marker[data-point="${clone.dataset.point}"][data-floor="${clone.dataset.floor}"]`);
+      if (orig) clone.style.opacity = computeOpacityFor(orig, currentViewLocal, currentFloorLocal);
+    });
+  }
+
+  // BEZPIECZNE otwieranie fullscreen
+  if (fullscreenBtnEl && fullscreenEl) {
+    fullscreenBtnEl.addEventListener('click', () => {
+      const l = (typeof layers !== 'undefined' && layers[currentFloor]) ? layers[currentFloor] : null;
+      if (!l) return;
+
+      try {
+        if (currentFloor === "4") {
+          const single = el(l.single);
+          if (single && fsImg1) fsImg1.src = single.src;
+          if (fsImg1) fsImg1.style.opacity = "1";
+          if (fsImg2) { fsImg2.style.display = "none"; fsImg2.style.opacity = "1"; }
+        } else {
+          const g = el(l.g);
+          const d = el(l.d);
+          if (g && fsImg1) fsImg1.src = g.src;
+          if (d && fsImg2) fsImg2.src = d.src;
+          if (fsImg2) fsImg2.style.display = "block";
+
+          if (currentView === "top") {
+            if (fsImg1) fsImg1.style.opacity = "1";
+            if (fsImg2) fsImg2.style.opacity = "0.3";
+          } else if (currentView === "bottom") {
+            if (fsImg1) fsImg1.style.opacity = "0.3";
+            if (fsImg2) fsImg2.style.opacity = "1";
+          } else {
+            if (fsImg1) fsImg1.style.opacity = "1";
+            if (fsImg2) fsImg2.style.opacity = "1";
+          }
+        }
+      } catch (err) {
+        console.warn('Błąd ustawiania obrazów fullscreen:', err);
+      }
+
+      fullscreenEl.style.display = 'flex';
+      requestAnimationFrame(() => fullscreenEl.classList.add('show'));
+
+      requestAnimationFrame(() => populateFsMarkers(currentView, currentFloor));
+    });
+  }
+
+  // zamykanie przez kliknięcie tła
+  if (fullscreenEl) {
+    fullscreenEl.addEventListener('click', (e) => {
+      if (e.target === fullscreenEl) {
+        fullscreenEl.classList.remove('show');
+        setTimeout(() => {
+          fullscreenEl.style.display = 'none';
+          clearFsMarkers();
+        }, 200);
+      }
+    });
+  }
+
+  // zamykanie przez przycisk
+  if (fsCloseBtn) {
+    fsCloseBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      fullscreenEl.classList.remove('show');
+      setTimeout(() => {
+        fullscreenEl.style.display = 'none';
+        clearFsMarkers();
+      }, 200);
+    });
+  }
+
+  const floorButtons = document.querySelectorAll('.pietra-item, .pietraa-item');
+  const viewButtons = document.querySelectorAll('.goradol-item');
+
+  function maybeRefreshFs() {
+    if (!fullscreenEl || !fullscreenEl.classList.contains('show')) return;
+    populateFsMarkers(currentView, currentFloor);
+  }
+
+  floorButtons.forEach(btn => btn.addEventListener('click', () => {
+    setTimeout(maybeRefreshFs, 50);
+  }));
+
+  viewButtons.forEach(btn => btn.addEventListener('click', () => {
+    setTimeout(maybeRefreshFs, 50);
+  }));
+
+  window._fsHelpers = {
+    populateFsMarkers,
+    clearFsMarkers,
+    refreshFsMarkerOpacity
+  };
+})();
+
+
+
+
 
     function el(sel) {
         return document.querySelector(sel);
@@ -47,33 +254,37 @@ document.addEventListener("DOMContentLoaded", () => {
     // Zmienia widoczność warstw mapy (pięter i góra/dół) poprzez ustawianie opacity odpowiednich obrazów zależnie od wybranego piętra i trybu widoku.
     // =========================
 
-    function updateView() {
+function updateView() {
 
-        Object.values(layers).forEach(l => {
-            if (l.g) el(l.g).style.opacity = "0";
-            if (l.d) el(l.d).style.opacity = "0";
-            if (l.single) el(l.single).style.opacity = "0";
-        });
+    // ukryj WSZYSTKIE obrazy
+    Object.values(layers).forEach(l => {
+        if (l.g) el(l.g).style.opacity = "0";
+        if (l.d) el(l.d).style.opacity = "0";
+        if (l.single) el(l.single).style.opacity = "0";
+    });
 
-        const l = layers[currentFloor];
-        if (!l) return;
+    const l = layers[currentFloor];
+    if (!l) return;
 
-        if (currentFloor === "4") {
-            el(l.single).style.opacity = "1";
-            return;
-        }
-
-        if (currentView === "top") {
-            el(l.g).style.opacity = "1";
-            el(l.d).style.opacity = "0.3";
-        } else if (currentView === "bottom") {
-            el(l.g).style.opacity = "0.3";
-            el(l.d).style.opacity = "1";
-        } else {
-            el(l.g).style.opacity = "1";
-            el(l.d).style.opacity = "1";
-        }
+    // 🔥 piętro 1 i 4 mają tylko jeden obraz
+    if (l.single) {
+        el(l.single).style.opacity = "1";
+        return;
     }
+
+    // 🔥 piętra 2 i 3 mają dwa widoki
+    if (currentView === "top") {
+        el(l.g).style.opacity = "1";
+        el(l.d).style.opacity = "0.3";
+    } else if (currentView === "bottom") {
+        el(l.g).style.opacity = "0.3";
+        el(l.d).style.opacity = "1";
+    } else {
+        el(l.g).style.opacity = "1";
+        el(l.d).style.opacity = "1";
+    }
+}
+
 
 // =========================
 // Przełączanie pięter
@@ -104,14 +315,47 @@ viewItems.forEach(item => {
 
         if (currentFloor === "4") return;
 
+        // aktywacja przycisków widoku
         viewItems.forEach(i => i.classList.remove("active"));
         item.classList.add("active");
 
         currentView = item.dataset.view;
 
+        // zmiana obrazów
         updateView(currentFloor, currentView);
+
+        // 🔥 1. RESET inline stylów markerów (usuwa duchy)
+        markers.forEach(m => {
+            m.style.opacity = "";
+            m.style.transform = "";
+        });
+
+        // 🔥 2. ustawienie markerów piętra (czyści active i pokazuje tylko właściwe)
+        updateMarkers(currentFloor);
+
+        // 🔥 3. logika GÓRA/DÓŁ tylko dla markerów aktualnego piętra
+        markers.forEach(m => {
+            if (m.dataset.floor !== currentFloor) return;
+
+            const level = m.dataset.level;
+
+            if (currentView === "top") {
+                m.style.opacity = (level === "down") ? "0.35" : "1";
+            } 
+            else if (currentView === "bottom") {
+                m.style.opacity = (level === "up") ? "0.35" : "1";
+            } 
+            else {
+                m.style.opacity = "1";
+            }
+        });
     });
 });
+
+
+
+
+
 
 
 // =========================
@@ -122,7 +366,8 @@ function toggleViewButtons(floor) {
 
     viewItems.forEach(btn => {
 
-        if (floor === "4") {
+        // 🔥 piętro 1 i 4 mają tylko jeden widok → blokujemy GÓRA/DÓŁ
+        if (floor === "1" || floor === "4") {
             btn.style.opacity = "0.3";
             btn.style.pointerEvents = "none";
         } else {
@@ -132,14 +377,27 @@ function toggleViewButtons(floor) {
     });
 }
 
+
     // =========================
     // Pokazywanie i ukrywanie markerów oraz elementów legendy w zależności od wybranego piętra.
     // =========================
 
 function updateMarkers(floor) {
 
+    // 🔥 1. RESET inline stylów markerów
     markers.forEach(m => {
-        m.classList.toggle("active", m.dataset.floor === floor);
+        m.style.opacity = "";
+        m.style.transform = "";
+    });
+
+    // 🔥 2. ukryj wszystkie markery
+    markers.forEach(m => m.classList.remove("active"));
+
+    // 🔥 3. pokaż tylko markery z aktualnego piętra
+    markers.forEach(m => {
+        if (m.dataset.floor === floor) {
+            m.classList.add("active");
+        }
     });
 }
 
@@ -154,7 +412,7 @@ function updateLegend(floor) {
     // KLIK LEGENDY
     // =========================
 
-    legendItems.forEach(item => {
+legendItems.forEach(item => {
     item.addEventListener("click", () => {
 
         legendItems.forEach(i => i.classList.remove("active"));
@@ -164,12 +422,14 @@ function updateLegend(floor) {
 
         const targetPoint = item.dataset.target;
 
-        const targetMarker = document.querySelector(`.map-marker[data-point="${targetPoint}"]`);
+        const targetMarkers = document.querySelectorAll(
+            `.map-marker[data-point="${targetPoint}"]`
+        );
 
-        if (targetMarker) {
+        targetMarkers.forEach(marker => {
+            marker.classList.add("pulse");
+        });
 
-            targetMarker.classList.add("pulse");
-        }
     });
 });
 
@@ -198,10 +458,10 @@ fullscreenBtn.addEventListener("click", () => {
 
         if (currentView === "top") {
             fsImg1.style.opacity = "1";
-            fsImg2.style.opacity = "0.3";
+            fsImg2.style.opacity = "0.15";
 
         } else if (currentView === "bottom") {
-            fsImg1.style.opacity = "0.3";
+            fsImg1.style.opacity = "0.15";
             fsImg2.style.opacity = "1";
 
         } else {
@@ -214,9 +474,11 @@ fullscreenBtn.addEventListener("click", () => {
     requestAnimationFrame(() => fullscreen.classList.add("show"));
 });
 
-fullscreen.addEventListener("click", () => {
-    fullscreen.classList.remove("show");
-    setTimeout(() => fullscreen.style.display = "none", 200);
+fullscreen.addEventListener("click", (e) => {
+    if (e.target === fullscreen) {
+        fullscreen.classList.remove("show");
+        setTimeout(() => fullscreen.style.display = "none", 200);
+    }
 });
 
     // =========================
@@ -296,7 +558,7 @@ function render() {
     mapa.addEventListener("pointercancel", stop);
     mapa.addEventListener("pointerleave", stop);
 
-    currentFloor = "1";
+    currentFloor = "4";
 
     updateView(currentFloor, currentView);
     updateMarkers(currentFloor);
@@ -478,5 +740,200 @@ setInterval(updateCountdown, 60000);
 // 
 // =========================
 
+// ==========================================
+//   FULLSCREEN – KONFIGURACJA
+// ==========================================
+
+const fsEl = document.getElementById("fullscreen");
+const fsImg1 = fsEl.querySelector(".fs-img1");
+const fsImg2 = fsEl.querySelector(".fs-img2");
+const fsMarkers = fsEl.querySelector(".fs-markers");
+const fsClose = document.getElementById("fsClose");
+
+let fsFloor = "1";
+let fsView = "both";
 
 
+// ==========================================
+//   USTAWIANIE OBRAZÓW W FULLSCREEN
+// ==========================================
+
+function fsUpdateImages() {
+
+    // 🔥 PIĘTRO 1 I 4 → JEDEN OBRAZ
+    if (fsFloor === "1" || fsFloor === "4") {
+
+        // pobierz obraz z mapy głównej
+        const singleImg = document.querySelector(`.img-${fsFloor}`);
+
+        fsImg1.src = singleImg.src;
+        fsImg1.style.opacity = "1";
+
+        // ukryj drugi obraz fullscreen
+        fsImg2.style.display = "none";
+        fsImg2.style.opacity = "0";
+
+        return;
+    }
+
+    // 🔥 PIĘTRA 2 I 3 → DWA OBRAZY
+    fsImg1.src = document.querySelector(`.img-${fsFloor}g`).src;
+    fsImg2.src = document.querySelector(`.img-${fsFloor}d`).src;
+
+    fsImg2.style.display = "block";
+
+    if (fsView === "top") {
+        fsImg1.style.opacity = "1";
+        fsImg2.style.opacity = "0.15";
+    } else if (fsView === "bottom") {
+        fsImg1.style.opacity = "0.15";
+        fsImg2.style.opacity = "1";
+    } else {
+        fsImg1.style.opacity = "1";
+        fsImg2.style.opacity = "1";
+    }
+}
+
+
+
+// ==========================================
+//   KOPIOWANIE MARKERÓW DO FULLSCREEN
+// ==========================================
+
+function fsUpdateMarkers() {
+
+    fsMarkers.innerHTML = "";
+
+    const mapLayer = document.querySelector(".map-layer");
+    const mapRect = mapLayer.getBoundingClientRect();
+
+    document.querySelectorAll(".map-marker").forEach(orig => {
+
+        if (orig.dataset.floor !== fsFloor) return;
+
+        const clone = orig.cloneNode(true);
+        clone.classList.add("fs-marker");
+
+        const r = orig.getBoundingClientRect();
+        const cx = (r.left + r.width/2  - mapRect.left) / mapRect.width  * 100;
+        const cy = (r.top  + r.height/2 - mapRect.top ) / mapRect.height * 100;
+
+        clone.style.left = cx + "%";
+        clone.style.top  = cy + "%";
+        clone.style.transform = "translate(-50%, -50%)";
+
+        if (fsFloor === "4") {
+            clone.style.opacity = "1";
+        } else if (fsView === "top") {
+            clone.style.opacity = (orig.dataset.level === "down") ? "0.15" : "1";
+        } else if (fsView === "bottom") {
+            clone.style.opacity = (orig.dataset.level === "up") ? "0.15" : "1";
+        } else {
+            clone.style.opacity = "1";
+        }
+
+        fsMarkers.appendChild(clone);
+    });
+}
+
+
+// ==========================================
+//   ZMIANA PIĘTRA W FULLSCREEN
+// ==========================================
+
+function fsSetFloor(floor) {
+    fsFloor = floor;
+
+    document.querySelectorAll("#fullscreen .fs-pietra-item")
+        .forEach(b => b.classList.toggle("active", b.dataset.floor === floor));
+
+    fsUpdateImages();
+    fsUpdateMarkers();
+    fsToggleViewButtons(fsFloor);
+
+}
+
+
+// ==========================================
+//   ZMIANA WIDOKU W FULLSCREEN
+// ==========================================
+
+function fsSetView(view) {
+    fsView = view;
+
+    document.querySelectorAll("#fullscreen .fs-goradol-item")
+        .forEach(b => b.classList.toggle("active", b.dataset.view === view));
+
+    fsUpdateImages();
+    fsUpdateMarkers();
+}
+
+
+// ==========================================
+//   PODPINANIE PRZYCISKÓW FULLSCREEN
+// ==========================================
+
+document.querySelectorAll("#fullscreen .fs-pietra-item").forEach(btn => {
+    btn.addEventListener("click", e => {
+        e.stopPropagation();
+        fsSetFloor(btn.dataset.floor);
+    });
+});
+
+document.querySelectorAll("#fullscreen .fs-goradol-item").forEach(btn => {
+    btn.addEventListener("click", e => {
+        e.stopPropagation();
+        fsSetView(btn.dataset.view);
+    });
+});
+
+
+// ==========================================
+//   OTWIERANIE FULLSCREEN
+// ==========================================
+
+fullscreenBtn.addEventListener("click", () => {
+
+
+
+
+    fsSetFloor(fsFloor);
+    fsSetView(fsView);
+    fsToggleViewButtons(fsFloor);
+
+    fsEl.style.display = "flex";
+    requestAnimationFrame(() => fsEl.classList.add("show"));
+});
+
+
+// ==========================================
+//   ZAMYKANIE FULLSCREEN
+// ==========================================
+
+fsClose.addEventListener("click", e => {
+    e.stopPropagation();
+    fsEl.classList.remove("show");
+    setTimeout(() => fsEl.style.display = "none", 200);
+});
+
+fsEl.addEventListener("click", e => {
+    if (e.target === fsEl) {
+        fsEl.classList.remove("show");
+        setTimeout(() => fsEl.style.display = "none", 200);
+    }
+});
+
+
+function fsToggleViewButtons(floor) {
+    const btns = document.querySelectorAll("#fullscreen .fs-goradol-item");
+
+    btns.forEach(btn => {
+        if (floor === "1" || floor === "4") {
+            btn.style.opacity = "0.3";
+            btn.style.pointerEvents = "none";
+        } else {
+            btn.style.opacity = "1";
+            btn.style.pointerEvents = "auto";
+        }
+    });
+}

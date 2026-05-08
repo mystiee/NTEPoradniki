@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="img/logonte.png">
 </head>
 <body>
     <!-- Navbar -->
@@ -31,13 +32,7 @@
         </div>
     </nav>
 
-
-
-
-
-
-
-<!-- Heist Guide Page with Interactive Map -->
+    <!-- Heist Guide Page with Interactive Map -->
     <div id="heistGuidePage">
         <div class="container2">
             <article class="article-container">
@@ -48,35 +43,22 @@
                         <span>✍️ Twórcy:<br> Figuana & Ichigo</span>
                     </div>
                 </header>
-
-
-                
             </article>
         </div>
     </div>
 
-
-
-
-
-
-
-
-
-
-        <!-- Interactive Map Section -->
+    <!-- Interactive Map Section -->
     <div class="map-section">
-
         <div class="map-container">
-
             <div class="tytul">
                 <h2>🗺️ Interaktywna mapa lokacji</h2>
             </div>
 
+            <!-- Ujednolicone klasy pietra -->
             <div class="pietra">
-                <div class="pietra-item active" data-view="1">Pierwsze</div>
+                <div class="pietra-item" data-view="1">Pierwsze</div>
                 <div class="pietra-item" data-view="2">Drugie</div>
-                <div class="pietra-item" data-view="3">Trzecie</div>
+                <div class="pietra-item active" data-view="3">Trzecie</div>
                 <div class="pietra-item" data-view="4">Skarbiec</div>
             </div>
 
@@ -87,111 +69,206 @@
             </div>
 
             <div class="mapa-box">
-
                 <div class="mapa">
-
-                    <div class="fullscreen-btn" id="fullscreenBtn">
+                    <div class="fullscreen-btn" id="fullscreenBtn" role="button">
                         ⛶
                     </div>
 
                     <div class="zoom-controls">
-                        <div id="zoomIn">+</div>
-                        <div id="zoomOut">−</div>
+                        <div id="zoomIn" role="button" aria-label="Przybliż">+</div>
+                        <div id="zoomOut" role="button" aria-label="Oddal">−</div>
                     </div>
 
-                   <div class="map-layer">
+                    <div class="map-layer">
+                        <img src="img/1.png" class="img-1" alt="Piętro 1">
+                        <img src="img/2g.png" class="img-2g" alt="Piętro 2 góra">
+                        <img src="img/2d.png" class="img-2d" alt="Piętro 2 dół">
+                        <img src="img/3g.png" class="img-3g" alt="Piętro 3 góra">
+                        <img src="img/3d.png" class="img-3d" alt="Piętro 3 dół">
+                        <img src="img/4.png" class="img-4" alt="Skarbiec">
 
 
-                        <img src="img/1g.png" class="img-1g">
-                        <img src="img/1d.png" class="img-1d">
-                        <img src="img/2g.png" class="img-2g">
-                        <img src="img/2d.png" class="img-2d">
-                        <img src="img/3g.png" class="img-3g">
-                        <img src="img/3d.png" class="img-3d">
-                        <img src="img/4.png" class="img-4">
-
+                        <!-- 1 -->
                         <div class="map-marker" data-point="punkt1" data-floor="1" style="top:5%; left:5%;">
                             <div class="map-marker-label">1</div>
                         </div>
+                        <!-- 1 -->
+                        <!-- 2 -->
                         <div class="map-marker" data-point="punkt2" data-floor="2" style="top:10%; left:10%;">
                             <div class="map-marker-label">2</div>
                         </div>
-                        <div class="map-marker" data-point="punkt3" data-floor="3" style="top:37%; left:42%;">
-                            <div class="map-marker-label">3</div>
+                        <!-- 2 -->
+
+
+
+                        <!-- 3 -->
+                        <div class="map-marker" data-point="punkt3" data-floor="3" data-level="up" style="top:32%; left:39%; background: #92c286;">
+                            <div class="map-marker-label"></div>
                         </div>
-                        <div class="map-marker" data-point="punkt4" data-floor="4" style="top:20%; left:70%;">
-                            <div class="map-marker-label">4</div>
+                        <div class="map-marker" data-point="punkt3" data-floor="3" data-level="up" style="top:32%; left:45.3%; background: #92c286;">
+                            <div class="map-marker-label"></div>
                         </div>
-                        <div class="map-marker" data-point="punkt5" data-floor="4" style="top:80%; left:40%;">
-                            <div class="map-marker-label">5</div>
+                        <div class="map-marker" data-point="punkt3" data-floor="3" data-level="up" style="top:39%; left:39%; background: #92c286;">
+                            <div class="map-marker-label"></div>
+                        </div>
+                        <div class="map-marker" data-point="punkt3" data-floor="3" data-level="up" style="top:39%; left:45.3%; background: #92c286;">
+                            <div class="map-marker-label"></div>
+                        </div>
+                        <div class="map-marker" data-point="punkt3" data-floor="3" data-level="up" style="top:32.5%; left:68.5%; background: #92c286;">
+                            <div class="map-marker-label"></div>
+                        </div>
+                        <div class="map-marker" data-point="punkt3" data-floor="3" data-level="up" style="top:17%; left:58.5%; background: #92c286;">
+                            <div class="map-marker-label"></div>
+                        </div>
+                        <div class="map-marker" data-point="punkt3" data-floor="3" data-level="up" style="top:17%; left:25.6%; background: #92c286;">
+                            <div class="map-marker-label"></div>
+                        </div>
+                        <div class="map-marker" data-point="punkt3" data-floor="3" data-level="up" style="top:11.5%; left:22.5%; background: #92c286;">
+                            <div class="map-marker-label"></div>
+                        </div>
+                        <div class="map-marker" data-point="punkt3" data-floor="3" data-level="up" style="top:60%; left:30.5%; background: #92c286;">
+                            <div class="map-marker-label"></div>
+                        </div>
+                        <div class="map-marker" data-point="punkt3" data-floor="3" data-level="up" style="top:64.5%; left:30.5%; background: #92c286;">
+                            <div class="map-marker-label"></div>
+                        </div>
+                        <div class="map-marker" data-point="punkt3" data-floor="3" data-level="up" style="top:60%; left:53%; background: #92c286;">
+                            <div class="map-marker-label"></div>
+                        </div>
+                        <div class="map-marker" data-point="punkt3" data-floor="3" data-level="up" style="top:64.5%; left:53%; background: #92c286;">
+                            <div class="map-marker-label"></div>
+                        </div>
+                        <div class="map-marker" data-point="punkt3" data-floor="3" data-level="down" style="top:54.6%; left:20%; background: #92c286;">
+                            <div class="map-marker-label"></div>
+                        </div>
+                        <div class="map-marker" data-point="punkt3" data-floor="3" data-level="down" style="top:54.6%; left:13%; background: #92c286;">
+                            <div class="map-marker-label"></div>
+                        </div>
+                        <div class="map-marker" data-point="punkt3" data-floor="3" data-level="down" style="top:86.5%; left:39%; background: #92c286;">
+                            <div class="map-marker-label"></div>
+                        </div>
+                        <div class="map-marker" data-point="punkt3" data-floor="3" data-level="down" style="top:86.5%; left:45%; background: #92c286;">
+                            <div class="map-marker-label"></div>
                         </div>
 
+                        <div class="map-marker" data-point="punkt4" data-floor="3" data-level="up" style="top:11.5%; left:58.5%; background: rgb(150, 52, 52);--pulse-color: rgb(150, 52, 52);">
+                            <div class="map-marker-label"></div>
+                        </div>
+                        <div class="map-marker" data-point="punkt4" data-floor="3" data-level="up" style="top:33.5%; left:78%; background: rgb(150, 52, 52);--pulse-color: rgb(150, 52, 52);">
+                            <div class="map-marker-label"></div>
+                        </div>
+                        <div class="map-marker" data-point="punkt4" data-floor="3" data-level="down" style="top:31%; left:25%; background: rgb(150, 52, 52);--pulse-color: rgb(150, 52, 52);">
+                            <div class="map-marker-label"></div>
+                        </div>
+                        <div class="map-marker" data-point="punkt4" data-floor="3" data-level="down" style="top:62.2%; left:30.5%; background: rgb(150, 52, 52);--pulse-color: rgb(150, 52, 52);">
+                            <div class="map-marker-label"></div>
+                        </div>
+                        <!-- 3 -->
+
+
+                        
+
+                        <!-- 4 -->
+                        <div class="map-marker" data-point="punkt5" data-floor="4" data-level="down" style="top:25.5%; left:82.5%; background: rgb(150, 52, 52);--pulse-color: rgb(150, 52, 52);">
+                            <div class="map-marker-label"></div>
+                        </div>
+                        <div class="map-marker" data-point="punkt5" data-floor="4" data-level="down" style="top:5%; left:48.5%; background: rgb(150, 52, 52);--pulse-color: rgb(150, 52, 52);">
+                            <div class="map-marker-label"></div>
+                        </div>
+                        <div class="map-marker" data-point="punkt6" data-floor="4" data-level="down" style="top:14%; left:48.5%; background: rgb(251, 255, 0);--pulse-color: rgb(251, 255, 0);">
+                            <div class="map-marker-label"></div>
+                        </div>
+                        <!-- 4 -->
 
                     </div>
                 </div>
 
                 <div class="legend">
                     <h3>Legenda</h3>
-
+                    <!-- 1 -->
                     <div class="legend-item" data-target="punkt1" data-floor="1">
                         <div class="legend-item-header">
                             <div class="legend-number">1</div>
                             <div class="legend-title">Główne wejście</div>
                         </div>
                         <div class="legend-description">Strażnik przy drzwiach. Użyj tylnego wejścia przez wentylację.</div>
-                    </div>               
-
+                    </div>
+                    <!-- 1 -->           
+                    <!-- 2 -->
                     <div class="legend-item" data-target="punkt2" data-floor="2">
                         <div class="legend-item-header">
                             <div class="legend-number">2</div>
                             <div class="legend-title">Kamery bezpieczeństwa</div>
                         </div>
                         <div class="legend-description">4 kamery w biurach. Zhackuj panel kontrolny w pokoju ochrony.</div>
-                    </div>                    
-
+                    </div>
+                    <!-- 2 -->                   
+                    <!-- 3 -->
                     <div class="legend-item" data-target="punkt3" data-floor="3">
                         <div class="legend-item-header">
-                            <div class="legend-number">3</div>
-                            <div class="legend-title">Test</div>
-                        </div>
-                        <div class="legend-description">test</div>
-                    </div>                  
-
-                    <div class="legend-item" data-target="punkt4" data-floor="4">
-                        <div class="legend-item-header">
-                            <div class="legend-number">4</div>
+                            <div class="legend-number" style="background: #92c286;"></div>
                             <div class="legend-title">Strażnicy</div>
                         </div>
-                        <div class="legend-description">2 patrolujących strażników. Patrol co 45 sekund.</div>
-                    </div>                   
-
+                        <div class="legend-description">Warto zabijać pozłacanych bo z nich wypada dodatkowa kasa.</div>
+                    </div>                  
+                    <div class="legend-item" data-target="punkt4" data-floor="3">
+                        <div class="legend-item-header">
+                            <div class="legend-number" style="background: rgb(150, 52, 52);"></div>
+                            <div class="legend-title">Wyjścia Ewakuacyjne</div>
+                        </div>
+                        <div class="legend-description">Na tym piętrze są 4 które losowo się wyłączają.</div>
+                    </div>
+                    <!-- 3 -->
+                    
+                    <!-- 4 -->
                     <div class="legend-item" data-target="punkt5" data-floor="4">
                         <div class="legend-item-header">
-                            <div class="legend-number">5</div>
-                            <div class="legend-title">Magazyn</div>
+                            <div class="legend-number" style="background: rgb(150, 52, 52);"></div>
+                            <div class="legend-title">Wyjścia Ewakuacyjne</div>
                         </div>
-                        <div class="legend-description">Znajdziesz tu apteczki i dodatkowy ekwipunek.</div>
+                        <div class="legend-description">Na tym piętrze są 4 które losowo się wyłączają.</div>
                     </div>
-
+                    <div class="legend-item" data-target="punkt6" data-floor="4">
+                        <div class="legend-item-header">
+                            <div class="legend-number" style="background: rgb(251, 255, 0)"></div>
+                            <div class="legend-title">Boss końcowy</div>
+                        </div>
+                    </div>
+                    <!-- 4 -->
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Fullscreen overlay: umieszczone na końcu body, poza kontenerami mapy -->
+    <div class="fullscreen" id="fullscreen" aria-hidden="true">
+        <div class="fullscreen-content" role="dialog" aria-modal="true">
+            <img class="fs-img fs-img1" alt="">
+            <img class="fs-img fs-img2" alt="">
+            <div class="fs-markers" aria-hidden="true"></div>
 
-<div class="fullscreen" id="fullscreen">
-    <div class="fullscreen-content">
-        <img class="fs-img fs-img1">
-        <img class="fs-img fs-img2">
+            <div id="fs-panel" class="fs-sidepanel">
+                <div class="fs-pietra">
+                    <div class="fs-pietra-item" data-floor="1">Pierwsze</div>
+                    <div class="fs-pietra-item" data-floor="2">Drugie</div>
+                    <div class="fs-pietra-item" data-floor="3">Trzecie</div>
+                    <div class="fs-pietra-item" data-floor="4">Skarbiec</div>
+                </div>
+
+                <div class="fs-goradol">
+                    <div class="fs-goradol-item" data-view="both">Całość</div>
+                    <div class="fs-goradol-item" data-view="top">Góra</div>
+                    <div class="fs-goradol-item" data-view="bottom">Dół</div>
+                </div>
+
+            </div>
+
+
+            <!-- PRZYCISK ZAMYKANIA: wewnątrz fullscreen, nie wpływa na layout strony -->
+            <button class="fs-close" id="fsClose" aria-label="Zamknij podgląd">✕</button>
+        </div>
     </div>
-</div>
 
-
-
-
-
-
-   
     <script src="script.js"></script>
 </body>
 </html>
