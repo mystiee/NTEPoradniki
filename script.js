@@ -558,7 +558,11 @@ function render() {
     mapa.addEventListener("pointercancel", stop);
     mapa.addEventListener("pointerleave", stop);
 
+
     currentFloor = "1";
+
+    currentFloor = "3";
+
 
     updateView(currentFloor, currentView);
     updateMarkers(currentFloor);
