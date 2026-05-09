@@ -589,7 +589,7 @@ body {
 
 .legend-item.active .legend-number {
     background: var(--color-accent-dark);
-    box-shadow: 0 0 12px rgba(146, 194, 134, 0.5);
+    box-shadow: 0 0 12px var(--legend-color, #92c286);
 }
 
 .legend-title {
@@ -831,7 +831,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 10px;
+    font-size: 8px;
     font-weight: 700;
     color: #0f0f0f;
     pointer-events: none;
@@ -991,6 +991,8 @@ body {
     pointer-events: auto;
     z-index: 30;
     transition: opacity 160ms ease;
+    width: 15px;
+    height: 15px;
 }
 
 /* animacja pulse z pełnym transform — NIE nadpisuje translate */
@@ -1088,11 +1090,10 @@ body {
 
     /* 🔥 ZMNIEJSZONE PRZYCISKI PIĘTER */
     #fullscreen .fs-pietra-item {
-        flex: 0 0 auto;
-        padding: 6px 10px;      /* 🔥 mniejsze */
+        flex: 1;
+        padding: 6px 0;         /* 🔥 mniejsze */
         font-size: 12px;        /* 🔥 mniejsze */
-        border-radius: 6px;     /* 🔥 bardziej kompaktowe */
-        white-space: nowrap;
+        border-radius: 6px;
     }
 
     /* GÓRA/DÓŁ — RZĄD */
