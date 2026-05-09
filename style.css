@@ -575,7 +575,7 @@ body {
 }
 
 .legend-number {
-    width: 28px;
+    width: 25px;
     height: 28px;
     color: var(--color-bg);
     border-radius: 50%;
@@ -835,6 +835,17 @@ body {
     font-weight: 700;
     color: #0f0f0f;
     pointer-events: none;
+}
+
+.map-marker-label img {
+    width: 15px;
+    height: 15px;
+    object-fit: contain;
+    display: block;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
 }
 
 
@@ -1157,5 +1168,76 @@ body {
 
 #fullscreen .fs-img2 {
     z-index: 1;
+    position: absolute;
+}
+
+
+.teleport-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+    margin-left: 0px;
+}
+
+.teleport-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.teleport-path {
+    font-size: 18px;
+    line-height: 1;
+    letter-spacing: -1px;
+}
+
+.map-marker2 {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    transform: none; /* centrowanie */
+    cursor: pointer;
+    opacity: 1;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    top: auto;
+    left: auto;
+}
+
+.map-marker-label2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 15px;
+    font-weight: 700;
+    color: #0f0f0f;
+    pointer-events: none;
+}
+
+.legend-marker-label2 img {
+    height: 20px;
+    width: 20px;
+    transform: translate(-50%, -50%);
+    position: absolute;
+}
+
+.legend-marker-label3 img {
+    height: 25px;
+    width: 25px;
+    transform: translate(-50%, -50%);
+    position: absolute;
+}
+
+.legend-marker-label4 img {
+    height: 17px;
+    width: 17px;
+    transform: translate(-50%, -50%);
     position: absolute;
 }
