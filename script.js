@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const markers = document.querySelectorAll(".map-marker");
     const legendItems = document.querySelectorAll(".legend-item");
+    const legendGroups = document.querySelectorAll(".legend-group2");
 
     const mapa = document.querySelector(".mapa");
     const zoomIn = document.getElementById("zoomIn");
@@ -306,6 +307,8 @@ floorItems.forEach(item => {
 });
 
 
+
+
 // =========================
 // Góra / dół / całość
 // =========================
@@ -403,8 +406,16 @@ function updateMarkers(floor) {
 
 function updateLegend(floor) {
 
+    // pojedyncze elementy
     legendItems.forEach(item => {
         item.style.display = item.dataset.floor === floor ? "block" : "none";
+    });
+
+    // całe grupy
+    const legendGroups = document.querySelectorAll(".legend-group2");
+
+    legendGroups.forEach(group => {
+        group.style.display = group.dataset.floor === floor ? "flex" : "none";
     });
 }
 

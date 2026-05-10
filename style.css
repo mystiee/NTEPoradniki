@@ -1241,3 +1241,37 @@ body {
     transform: translate(-50%, -50%);
     position: absolute;
 }
+
+.legend-item-header2 {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    width: 100%;
+}
+
+.legend-icon2 {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.legend-icon2 img {
+    width: 70px;
+    height: 70px;
+
+    object-fit: contain;
+}
+
+.legend-group2 {
+    padding: 20px;
+
+    background: #1a1a1a;
+
+    border: 2px solid var(--color-border);
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
