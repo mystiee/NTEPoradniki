@@ -683,7 +683,6 @@ function getNextResetDate(dayTarget, hourTarget) {
     nextReset.setDate(nowPL.getDate() + daysToTarget);
     nextReset.setHours(hourTarget, 0, 0, 0);
 
-    // 🔥 jeśli to ten sam dzień, ale już po godzinie → następny tydzień
     if (daysToTarget === 0 && nowPL >= nextReset) {
         nextReset.setDate(nextReset.getDate() + 7);
     }
@@ -705,21 +704,28 @@ function updateCountdown() {
 
         let target;
 
-        // 🔥 TRYB 1: TYGODNIOWY (masz data-day)
         if (dayAttr !== undefined) {
-
             const day = parseInt(dayAttr) || 1;
             target = getNextResetDate(day, hour);
-
-        } 
-        // 🔥 TRYB 2: CODZIENNY (brak data-day)
-        else {
-
+        } else {
             target = new Date(now);
             target.setHours(hour, 0, 0, 0);
 
             if (target <= now) {
                 target.setDate(target.getDate() + 1);
+            }
+        }
+
+        // 🔥 OPCJA: RESET CO 2 TYGODNIE
+        const every = el.dataset.every;
+
+        if (every === "2w") {
+            const oneJan = new Date(target.getFullYear(), 0, 1);
+            const numberOfDays = Math.floor((target - oneJan) / (24 * 60 * 60 * 1000));
+            const weekNumber = Math.ceil((numberOfDays + oneJan.getDay() + 1) / 7);
+
+            if (weekNumber % 2 !== 0) {
+                target.setDate(target.getDate() + 7);
             }
         }
 
@@ -734,7 +740,6 @@ function updateCountdown() {
         const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
         const minutes = Math.floor((diff / (1000 * 60)) % 60);
 
-        // 🔥 FORMAT (ładniejszy dla daily)
         if (dayAttr === undefined) {
             el.textContent = `${hours}h ${minutes}m`;
         } else {
@@ -743,7 +748,6 @@ function updateCountdown() {
     });
 }
 
-// start
 updateCountdown();
 setInterval(updateCountdown, 60000);
 
